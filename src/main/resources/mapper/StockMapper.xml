@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tian.secondkill.dao.StockDao">
+
+    <!--单线程下查询-->
+    <select id="checkStock" resultType="Stock">
+        select * from stock where id = #{id}
+    </select>
+
+
+    <!--单线程下根据秒杀商品id查询库存并更新库存信息-->
+    <update id="updateSale" parameterType="int">
+        update stock set sale = #{sale} where id = #{id}
+    </update>
+
+    <!--使用乐观锁防止高并发下产生超卖现象-->
+    <!--高并发下根据秒杀商品id查询库存并更新库存信息-->
+    <!--<update id="updateSale" parameterType="Stock">
+        update stock set
+               sale=sale+1,version=version+1
+        where
+               id =#{id}
+          and
+               version = #{version}
+    </update>-->
+
+
+</mapper>

@@ -1,0 +1,29 @@
+#数据库配置,静态资源的配置
+spring:
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/shop?useUnicode=true&characterEncoding=UTF-8&useSSL=true&serverTimezone=UTC
+
+  thymeleaf:
+    cache: false
+  resources:
+    static-locations: classpath:/templates/,classpath:/static/
+  redis:
+    port: 6379
+    database: 0
+    host: localhost
+
+#mybatis的文件配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.tian.secondkill.pojo
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#项目端口和项目名配置
+server:
+  port: 8889
+  servlet:
+    context-path: /tian
